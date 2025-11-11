@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Novo Vendedor{% endblock %}
+
+{% block content %}
+<h2>Novo Vendedor</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {% if next_url %}<input type="hidden" name="next" value="{{ next_url }}">{% endif %}
+
+  <div style="display:grid;gap:10px;max-width:480px;">
+    <div>
+      <label>Nome</label>
+      {{ form.name }}
+      {% if form.name.errors %}<div style="color:#b91c1c">{{ form.name.errors }}</div>{% endif %}
+    </div>
+    <div>
+      <label>Contato</label>
+      {{ form.contact }}
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      {{ form.is_active }} <label>Ativo</label>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <button type="submit">Salvar</button>
+    <a class="btn" href="{% url 'operacao_nova' %}">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

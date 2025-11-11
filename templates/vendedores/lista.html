@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendedores</title>
+  <style>
+    :root { --pad: 16px; --radius: 12px; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin:0; }
+    header { padding: var(--pad); border-bottom:1px solid #eee; display:flex; gap:8px; align-items: center; justify-content: space-between; }
+    .title { font-weight: 600; }
+    .actions a { text-decoration:none; padding:10px 12px; border:1px solid #ddd; border-radius: 10px; }
+    .wrap { padding: var(--pad); }
+    .card { border:1px solid #eee; border-radius: var(--radius); padding: 14px; margin-bottom: 10px; display:flex; justify-content: space-between; align-items: center; }
+    .name { font-size: 16px; font-weight: 600; }
+    .contact { font-size: 12px; color:#666; }
+    .saldo { font-weight: 700; }
+    .grid { display:grid; gap:10px; }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">Vendedores</div>
+    <div class="actions">
+      <a href="/home/">Home</a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    {% if vendedores %}
+      <div class="grid">
+        {% for v in vendedores %}
+          <div class="card">
+            <div>
+              <div class="name">{{ v.name }}</div>
+              {% if v.contact %}<div class="contact">{{ v.contact }}</div>{% endif %}
+            </div>
+            <div class="saldo">R$ {{ v.saldo|floatformat:2 }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Nenhum vendedor cadastrado.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

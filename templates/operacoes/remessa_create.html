@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Nova Remessa{% endblock %}
+
+{% block content %}
+<h2>Nova Remessa</h2>
+
+<form method="post">
+  {% csrf_token %}
+
+  <fieldset style="margin-bottom:16px;padding:8px;border:1px solid #e5e7eb;border-radius:8px;">
+    <legend><strong>Dados da remessa</strong></legend>
+    {{ form.as_p }}
+  </fieldset>
+
+  <fieldset style="margin-bottom:16px;padding:8px;border:1px solid #e5e7eb;border-radius:8px;">
+    <legend><strong>Itens</strong></legend>
+
+    {{ formset.management_form }}
+
+    {% for f in formset.forms %}
+      <div style="display:grid;grid-template-columns:1fr 90px 120px 80px;gap:8px;align-items:end;margin-bottom:10px;">
+        <div>
+          <label>Produto</label>
+          {{ f.product }}
+        </div>
+        <div>
+          <label>Qtd</label>
+          {{ f.qty }}
+        </div>
+        <div>
+          <label>Preço (un)</label>
+          {{ f.unit_price }}
+        </div>
+        <div>
+          {% if f.instance.pk %}
+            <label>Excluir</label>
+            {{ f.DELETE }}
+          {% endif %}
+        </div>
+      </div>
+      {% if f.non_field_errors %}<div style="color:#b91c1c">{{ f.non_field_errors }}</div>{% endif %}
+    {% endfor %}
+  </fieldset>
+
+  <button type="submit">Salvar</button>
+  <a class="btn" href="{% url 'vendedores_list' %}">Cancelar</a>
+</form>
+{% endblock %}

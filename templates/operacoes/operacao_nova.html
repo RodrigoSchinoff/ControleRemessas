@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+{% block title %}Nova Operação{% endblock %}
+
+{% block content %}
+
+<style>
+  .wrap-compact { max-width: 560px; }
+  .card-compact { padding: .75rem !important; }
+  .h5-compact   { margin: .25rem 0 .5rem 0; font-size: 1.05rem; }
+  .mb-compact   { margin-bottom: .5rem !important; }
+  .g-compact    { --bs-gutter-x: .5rem; --bs-gutter-y: .25rem; }
+  label.form-label { margin-bottom: .125rem; font-size: .9rem; }
+  .btn-sm-tight { padding: .25rem .5rem; font-size: .85rem; }
+
+  /* ✅ Padroniza tamanho/fonte de TODOS os inputs/selects (inclui os calculados) */
+  .form-control, .form-select, select, input[type="text"], input[type="date"] {
+    height: calc(1.5em + .5rem + 2px);
+    padding: .25rem .5rem;
+    font-size: .9rem;
+    line-height: 1.25;
+  }
+
+  /* visual leve para campos calculados, sem alterar tamanho/fonte */
+  .total-linha { background:#f6f7f8; }
+
+    /* Solução 1: Qtd com tamanho intermediário */
+  .campo-qtd input {
+    min-width: 60px;     /* 60px = meio termo entre col-1 e col-2 */
+    text-align: center;  /* centraliza o número */
+  }
+
+    /* Reduz levemente a fonte dos inputs (inclusive Qtd, Preço e Total) */
+  .form-control, .form-select {
+      font-size: 0.82rem;   /* era 0.9rem */
+  }
+
+  /* Opcional: deixa números ainda mais ajustados visualmente */
+  .campo-qtd input,
+  .campo-preco input,
+  .campo-total input,
+  #qtd_equivalente_preview {
+      font-size: 0.80rem !important;
+  }
+
+  /* Força o tamanho da fonte do campo Preço (independe de classes) */
+  input[name$="-unit_price"] { font-size: 0.80rem !important; }
+
+  /* (opcional) padroniza também Qtd e Total, caso queira garantir */
+  input[name$="-qty"]         { font-size: 0.80rem !important; }
+  .total-linha                { font-size: 0.80rem !important; }
+
+</style>
+
+<div class="container my-3 wrap-compact">
+  <h3 class="mb-3" style="font-weight:700;">Nova Operação</h3>
+
+  <!-- Seleção (GET) -->
+  <form id="cab-form" method="get" class="card card-compact mb-2">
+    <h5 class="h5-compact">Seleção</h5>
+
+    <div class="mb-compact">
+      <label class="form-label">Vendedor</label>
+      {{ cab_form.seller }}
+      <div class="mt-1">
+        <a href="{% url 'vendedor_create' %}?next={{ request.get_full_path|urlencode }}">+ Cadastrar vendedor</a>
+      </div>
+    </div>
+
+    <div class="mb-1">
+      <label class="form-label">Tipo</label>
+      <div>{{ cab_form.tipo }}</div>
+    </div>
+    <!-- sem botão Continuar; auto-submit no JS -->
+  </form>
+
+  {% if mostrar_remessa %}
+  <!-- Remessa (POST) -->
+  <form method="post" class="card card-compact mb-2" id="form-remessa">
+    {% csrf_token %}
+    <input type="hidden" name="seller" value="{{ seller_id }}">
+    <input type="hidden" name="tipo" value="{{ tipo }}">
+
+    <h5 class="h5-compact">Dados da Remessa</h5>
+
+    <div class="mb-2" style="max-width: 220px;">
+      <label class="form-label">Data</label>
+      {{ rem_form.date }}
+    </div>
+
+    <h5 class="h5-compact mt-2">Itens</h5>
+
+    {{ formset.management_form }}
+
+    <div id="itens-container">
+      {% for f in formset.forms %}
+      <!-- ✅ Produto 6 | Qtd 1 | Preço 2 | Total 3 (Total maior, Qtd menor) -->
+      <div class="row g-compact align-items-end mb-2 linha-item">
+        <div class="col-6">
+          <label class="form-label">Produto</label>
+          {{ f.product }}
+        </div>
+        <div class="col-2 campo-qtd">
+          <label class="form-label">Qtd</label>
+          {{ f.qty }}
+        </div>
+        <div class="col-2">
+          <label class="form-label">Preço</label>
+          {{ f.unit_price }}
+        </div>
+        <div class="col-2">
+          <label class="form-label">Total</label>
+          <input class="form-control total-linha" readonly>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <button type="button" id="btn-add-item" class="btn btn-secondary btn-sm-tight w-100">+ Adicionar item</button>
+
+    <div class="mt-2 d-flex gap-2">
+      <button class="btn btn-success btn-sm-tight flex-fill">Salvar</button>
+      <a href="{% url 'vendedores_list' %}" class="btn btn-link btn-sm-tight flex-fill text-center">Cancelar</a>
+    </div>
+  </form>
+  {% endif %}
+
+  {% if mostrar_recebimento %}
+  <!-- Recebimento (POST) -->
+  <form method="post" class="card card-compact mb-2" id="form-recebimento">
+    {% csrf_token %}
+    <input type="hidden" name="seller" value="{{ seller_id }}">
+    <input type="hidden" name="tipo" value="{{ tipo }}">
+
+    <h5 class="h5-compact">Recebimento</h5>
+
+    <!-- ✅ Tudo em uma linha e do mesmo tamanho -->
+    <div class="row g-compact align-items-end mb-2">
+      <div class="col-4">
+        <label class="form-label">Data</label>
+        {{ rec_form.date }}
+      </div>
+      <div class="col-4">
+        <label class="form-label">Valor recebido (R$)</label>
+        {{ rec_form.amount }}
+      </div>
+      <div class="col-4">
+        <label class="form-label">Qtd equivalente</label>
+        <input id="qtd_equivalente_preview" class="form-control" readonly>
+      </div>
+    </div>
+
+    <div class="mt-2 d-flex gap-2">
+      <button class="btn btn-success btn-sm-tight flex-fill">Salvar</button>
+      <a href="{% url 'vendedores_list' %}" class="btn btn-link btn-sm-tight flex-fill text-center">Cancelar</a>
+    </div>
+  </form>
+  {% endif %}
+
+</div>
+
+<script>
+(function(){
+
+  // ---------- helpers formato BR ----------
+  function parseBR(s){
+    if (!s) return 0;
+    return parseFloat(String(s).replace(/\./g,'').replace(',','.')) || 0;
+  }
+  function fmtBR(n, dec){
+    return (isFinite(n) ? n : 0).toLocaleString('pt-BR', {
+      minimumFractionDigits: dec, maximumFractionDigits: dec
+    });
+  }
+  function wireBRInput(el, dec){
+    if(!el) return;
+    el.addEventListener('input', function(){
+      this.value = this.value.replace(/[^\d,\.]/g,'').replace(/(\,.*)\,/g,'$1');
+    });
+    el.addEventListener('blur', function(){
+      const v = parseBR(this.value);
+      this.value = fmtBR(v, dec);
+    });
+  }
+  function normalizeOnSubmit(form){
+    if(!form) return;
+    form.addEventListener('submit', function(){
+      form.querySelectorAll('.br-0,.br-2').forEach(function(el){
+        const v = parseBR(el.value);
+        el.value = (el.classList.contains('br-0') ? String(Math.round(v)) : String(v));
+      });
+    });
+  }
+
+  // auto-submit ao trocar vendedor/tipo
+  const cabForm = document.getElementById('cab-form');
+  if (cabForm) {
+    cabForm.querySelectorAll('select, input[type=radio]').forEach(el=>{
+      el.addEventListener('change', ()=> cabForm.submit());
+    });
+  }
+
+  // -------- Remessa: totais e máscara --------
+  function wireLinha(row){
+    const qty   = row.querySelector('input[name$="-qty"]');
+    const price = row.querySelector('input[name$="-unit_price"]');
+    const total = row.querySelector('.total-linha');
+
+    if(qty){ qty.classList.add('form-control','br-0'); wireBRInput(qty, 0); }
+    if(price){ price.classList.add('form-control','br-2'); wireBRInput(price, 2); }
+    if(total){ total.classList.add('form-control'); }
+
+    function calc(){
+      const q = parseBR(qty && qty.value);
+      const p = parseBR(price && price.value);
+      if(total) total.value = fmtBR(q * p, 2);
+    }
+    if(qty)   qty.addEventListener('input', calc);
+    if(price) price.addEventListener('input', calc);
+    if(qty)   qty.addEventListener('blur', calc);
+    if(price) price.addEventListener('blur', calc);
+  }
+
+  document.querySelectorAll('.linha-item').forEach(wireLinha);
+
+  // adicionar item no formset
+  const addBtn = document.getElementById('btn-add-item');
+  const container = document.getElementById('itens-container');
+  const totalForms = document.querySelector('input[name$="-TOTAL_FORMS"]');
+
+  if(addBtn && container && totalForms){
+    addBtn.addEventListener('click', function(){
+      const idx = parseInt(totalForms.value, 10);
+      const first = container.querySelector('.linha-item');
+      const clone = first.cloneNode(true);
+
+      clone.querySelectorAll('input, select').forEach(el=>{
+        if (el.name) el.name = el.name.replace(/-\d+-/, `-${idx}-`);
+        if (el.tagName === 'INPUT') el.value = '';
+        if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      });
+
+      container.appendChild(clone);
+      wireLinha(clone);
+      totalForms.value = String(idx + 1);
+    });
+  }
+
+  // normalização no submit
+  normalizeOnSubmit(document.getElementById('form-remessa'));
+
+  // -------- Recebimento: máscara + preview --------
+  const amountInput = document.querySelector('#form-recebimento input[name="amount"]');
+  const qtdPrev = document.getElementById('qtd_equivalente_preview');
+
+  if(amountInput){
+    amountInput.classList.add('form-control','br-2'); wireBRInput(amountInput, 2);
+    amountInput.addEventListener('input', function(){
+      const v = parseBR(amountInput.value);
+      if(qtdPrev){
+        // ajuste aqui quando tiver preço médio exposto
+        qtdPrev.value = fmtBR(v, 2);
+        qtdPrev.classList.add('form-control');
+      }
+    });
+    normalizeOnSubmit(document.getElementById('form-recebimento'));
+  }
+
+})();
+</script>
+
+{% endblock %}
