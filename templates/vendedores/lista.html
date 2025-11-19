@@ -34,9 +34,14 @@
       <div class="grid">
         {% for v in vendedores %}
           <div class="card">
-            <div>
+            <div style="flex:1;">
               <div class="name">{{ v.name }}</div>
               {% if v.contact %}<div class="contact">{{ v.contact }}</div>{% endif %}
+              <div>
+                <a href="{% url 'remessas_por_vendedor' v.id %}" style="font-size:12px; text-decoration:none; color:#4a5568;">
+                  Ver remessas →
+                </a>
+              </div>
             </div>
             <div class="saldo">R$ {{ v.saldo|floatformat:2 }}</div>
           </div>
