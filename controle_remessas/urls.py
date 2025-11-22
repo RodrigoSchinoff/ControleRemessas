@@ -7,6 +7,8 @@ from django.contrib.auth import views as auth_views
 from produtos.views import produto_create
 from core.views import home
 from vendedores.views import vendedores_list, vendedor_create  # ✅ importar daqui
+from core.views import logout_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,13 +31,7 @@ urlpatterns = [
     # Operações (remessa/recebimento)
     path('operacoes/', include('operacoes.urls')),
 
-    path(
-        'logout/',
-        auth_views.LogoutView.as_view(
-            next_page='/accounts/login/',
-            http_method_names=['get', 'post']
-        ),
-        name='logout'
-    ),
+    path('logout/', logout_view, name='logout'),
+
 
 ]
