@@ -29,7 +29,13 @@ urlpatterns = [
     # Operações (remessa/recebimento)
     path('operacoes/', include('operacoes.urls')),
 
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
+    path(
+        'logout/',
+        auth_views.LogoutView.as_view(
+            next_page='/accounts/login/',
+            http_method_names=['get', 'post']
+        ),
+        name='logout'
+    ),
 
 ]
