@@ -2,6 +2,17 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+<!-- Barra superior com Logout -->
+<div style="text-align: right; padding: 10px 15px;">
+  <span style="margin-right: 10px; font-weight: 600;">
+    {{ request.user.username }}
+  </span>
+  <a href="{% url 'logout' %}" style="text-decoration: none; color: #c00; font-weight: bold;">
+    Sair
+  </a>
+</div>
+
 <div class="container my-4 text-center">
 
   <h4 class="mb-4" style="font-weight:700;">Menu Principal</h4>
