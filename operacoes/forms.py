@@ -54,6 +54,11 @@ class RemessaItemForm(forms.ModelForm):
             'product': forms.Select(attrs={'class': 'form-select'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['product'].required = False
+        self.fields['qty'].required = False
+        self.fields['unit_price'].required = False
 
 RemessaItemFormSet = inlineformset_factory(
     Remessa,

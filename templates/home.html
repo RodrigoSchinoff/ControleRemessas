@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+  <h3 class="mb-4 text-center">Controle de Remessas</h3>
+
+  <div class="d-grid gap-3">
+    <a href="{% url 'operacao_nova' %}" class="btn btn-primary btn-lg">
+      Nova Operação
+    </a>
+
+    <a href="/produtos/" class="btn btn-outline-secondary btn-lg">
+      Produtos
+    </a>
+
+    <a href="/vendedores/" class="btn btn-outline-secondary btn-lg">
+      Vendedores
+    </a>
+  </div>
+
+</div>
+{% endblock %}

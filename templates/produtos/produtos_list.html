@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Produtos</h3>
+    <a href="{% url 'produto_create' %}" class="btn btn-sm btn-primary">
+      Novo produto
+    </a>
+  </div>
+
+  <div class="list-group">
+    {% for p in produtos %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ p.name }}</strong>
+        </div>
+      </div>
+    {% empty %}
+      <p>Nenhum produto cadastrado.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

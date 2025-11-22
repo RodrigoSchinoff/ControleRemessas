@@ -1,1 +1,35 @@
-<a href="{% url 'remessa_create' %}">Nova Remessa</a>
+{% extends "base.html" %}
+{% block title %}Vendedores{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+  <h3 class="mb-3">Vendedores</h3>
+
+  <div class="list-group">
+    {% for v in vendedores %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ v.name }}</strong><br>
+          <small>Saldo: R$ {{ v.saldo }}</small><br>
+          {% if v.contact %}
+            <small>{{ v.contact }}</small>
+          {% endif %}
+        </div>
+        <div class="text-end">
+          <a href="{% url 'remessas_por_vendedor' v.id %}" class="btn btn-sm btn-outline-secondary mb-1">
+            Remessas
+          </a>
+          <a href="{% url 'recebimentos_por_vendedor' v.id %}" class="btn btn-sm btn-outline-secondary mb-1">
+            Recebimentos
+          </a>
+          <a href="{% url 'operacao_nova' %}?seller={{ v.id }}&tipo=REMESSA" class="btn btn-sm btn-primary">
+            Nova remessa
+          </a>
+        </div>
+      </div>
+    {% empty %}
+      <p>Nenhum vendedor cadastrado.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

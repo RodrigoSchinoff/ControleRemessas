@@ -4,15 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d434e294-16ec-42e3-97c2-6f9a508c01e8" name="Changes" comment="Commit Mac 11/11/2025 00:25">
-      <change afterPath="$PROJECT_DIR$/templates/operacoes/remessas_por_vendedor.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/produtos/produto_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/projeto-remessas.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projeto-remessas.iml" afterDir="false" />
+    <list default="true" id="d434e294-16ec-42e3-97c2-6f9a508c01e8" name="Changes" comment="Commit Mac 19/11/2025 00:25">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.sh " afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle_remessas/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle_remessas/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle_remessas/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle_remessas/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controle_remessas/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/migrations/0002_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/migrations/0003_alter_remessaitem_qty.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/migrations/0004_alter_remessaitem_qty.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operacoes/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/produtos/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/preco_bom_demais.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/operacoes/recebimentos_por_vendedor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/produtos/produtos_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vendedores/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/operacoes/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/operacoes/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/operacoes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/operacoes/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/core/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/core/vendedores_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/core/vendedores_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/operacoes/operacao_nova.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/operacoes/operacao_nova.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/vendedores/lista.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/vendedores/lista.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/operacoes/remessa_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/operacoes/remessa_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/operacoes/remessas_por_vendedor.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/operacoes/remessas_por_vendedor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +116,11 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/img" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -83,11 +145,20 @@
       <option name="project" value="LOCAL" />
       <updated>1762831558676</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Commit Mac 19/11/2025 00:25">
+      <option name="closed" value="true" />
+      <created>1763522883766</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763522883766</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commit Mac 11/11/2025 00:25" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit Mac 11/11/2025 00:25" />
+    <MESSAGE value="Commit Mac 19/11/2025 00:25" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Mac 19/11/2025 00:25" />
   </component>
 </project>

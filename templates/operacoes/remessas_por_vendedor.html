@@ -2,14 +2,18 @@
 {% block title %}Remessas de {{ vendedor.name }}{% endblock %}
 
 {% block content %}
-<h2>Remessas de {{ vendedor.name }}</h2>
-
 <div class="container mt-3">
+  <p class="mb-3">
+    <a href="{% url 'vendedores_list' %}" class="btn btn-sm btn-outline-secondary">
+      Voltar
+    </a>
+  </p>
+
+  <h2 class="mb-3">Remessas de {{ vendedor.name }}</h2>
 
   {% for r in remessas %}
     <div class="p-3 mb-2 bg-white border rounded">
-
-      <strong>Data:</strong> {{ r.date }}<br>
+      <strong>Data:</strong> {{ r.date|date:"d/m/Y" }}<br>
       <strong>Obs:</strong> {{ r.obs|default:"(sem observações)" }}<br>
 
       <a href="{% url 'remessa_detail' r.id %}" class="btn btn-sm btn-outline-primary mt-2">
@@ -19,11 +23,5 @@
   {% empty %}
     <p>Nenhuma remessa encontrada.</p>
   {% endfor %}
-
 </div>
-
-<p class="mt-3">
-  <a class="btn btn-secondary" href="/vendedores/">Voltar</a>
-</p>
-
 {% endblock %}

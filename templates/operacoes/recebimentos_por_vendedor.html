@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Recebimentos de {{ vendedor.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+
+  <p class="mb-3">
+    <a href="{% url 'vendedores_list' %}" class="btn btn-sm btn-outline-secondary">
+      Voltar
+    </a>
+  </p>
+
+  <h2 class="mb-3">Recebimentos - {{ vendedor.name }}</h2>
+
+  {% if recebimentos %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Valor Recebido</th>
+          <th>Qtd Recebida</th>
+          <th>Saldo Pendente</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in recebimentos %}
+          <tr>
+            <td>{{ r.date|date:"d/m/Y" }}</td>
+            <td>{{ r.amount }}</td>
+            <td>{{ r.qtd_equivalente }}</td>
+            <td>{{ r.saldo_apos }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Não há recebimentos registrados para este vendedor.</p>
+  {% endif %}
+
+</div>
+{% endblock %}
