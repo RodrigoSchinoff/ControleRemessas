@@ -5,8 +5,6 @@ from django.urls import path, include
 from django.views.generic import RedirectView
 from django.contrib.auth import views as auth_views
 from produtos.views import produto_create
-
-
 from core.views import home
 from vendedores.views import vendedores_list, vendedor_create  # ✅ importar daqui
 
@@ -30,6 +28,8 @@ urlpatterns = [
 
     # Operações (remessa/recebimento)
     path('operacoes/', include('operacoes.urls')),
+
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
 
 ]
